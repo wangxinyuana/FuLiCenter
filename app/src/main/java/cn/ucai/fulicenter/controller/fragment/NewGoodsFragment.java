@@ -1,6 +1,5 @@
 package cn.ucai.fulicenter.controller.fragment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,20 +12,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
-
 import cn.ucai.fulicenter.controller.adapter.GoodsAdapter;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.net.IModelNewGoods;
 import cn.ucai.fulicenter.model.net.ModelNewGoods;
-
 import cn.ucai.fulicenter.model.utils.ConvertUtils;
 import cn.ucai.fulicenter.model.utils.OkHttpUtils;
-import cn.ucai.fulicenter.view.SpaceItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +39,7 @@ public class NewGoodsFragment extends Fragment {
     GoodsAdapter mAdapter;
     ArrayList<NewGoodsBean> mList = new ArrayList<>();
     IModelNewGoods modelNewGoods;
-    int pageId =1;
+    int pageId = 1;
 
     public NewGoodsFragment() {
         // Required empty public constructor
@@ -89,15 +84,13 @@ public class NewGoodsFragment extends Fragment {
     }
 
 
-
-
     private void setPullDownListener() {
         srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 srl.setRefreshing(true);
                 tvRefreshHint.setVisibility(View.VISIBLE);
-                pageId=1;
+                pageId = 1;
                 initData(I.ACTION_PULL_DOWN);
             }
         });
@@ -106,43 +99,43 @@ public class NewGoodsFragment extends Fragment {
     private void initData(final int action) {
         modelNewGoods.downData(getContext(), I.CAT_ID, pageId,
                 new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
-            @Override
-            public void onSuccess(NewGoodsBean[] result) {
-                srl.setRefreshing(false);
-                tvRefreshHint.setVisibility(View.GONE);
-                mAdapter.setMore(result!=null&&result.length>0);
-                if(!mAdapter.isMore()){
-                    if(action==I.ACTION_PULL_DOWN){
-                        mAdapter.setFooter("无更多数据");
-                    }
-                    return;
-                }
-                mAdapter.setFooter("加载更多数据");
-                ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
-                switch(action){
-                    case I.ACTION_DOWNLOAD:
-                        mAdapter.initData(list);
-                        break;
-                    case I.ACTION_PULL_DOWN:
-                        mAdapter.initData(list);
+                    @Override
+                    public void onSuccess(NewGoodsBean[] result) {
                         srl.setRefreshing(false);
                         tvRefreshHint.setVisibility(View.GONE);
-                        mAdapter.initData(list);
-                        break;
-                    case I.ACTION_PULL_UP:
-                        mAdapter.addData(list);
-                        break;
-                }
+                        mAdapter.setMore(result != null && result.length > 0);
+                        if (!mAdapter.isMore()) {
+                            if (action == I.ACTION_PULL_DOWN) {
+                                mAdapter.setFooter("无更多数据");
+                            }
+                            return;
+                        }
+                        mAdapter.setFooter("加载更多数据");
+                        ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
+                        switch (action) {
+                            case I.ACTION_DOWNLOAD:
+                                mAdapter.initData(list);
+                                break;
+                            case I.ACTION_PULL_DOWN:
+                                mAdapter.initData(list);
+                                srl.setRefreshing(false);
+                                tvRefreshHint.setVisibility(View.GONE);
+                                mAdapter.initData(list);
+                                break;
+                            case I.ACTION_PULL_UP:
+                                mAdapter.addData(list);
+                                break;
+                        }
                /* mList.addAll(list);
                 mAdapter.initData(list);*/
 
-            }
+                    }
 
-            @Override
-            public void onError(String error) {
+                    @Override
+                    public void onError(String error) {
 
-            }
-        });
+                    }
+                });
     }
 
     private void initView() {
@@ -154,7 +147,7 @@ public class NewGoodsFragment extends Fragment {
         gm = new GridLayoutManager(getContext(), I.COLUM_NUM);
         rvNewGoods.setLayoutManager(gm);
         rvNewGoods.setHasFixedSize(true);
-       // rvNewGoods.addItemDecoration(new SpaceItemDecoration(20));
+        // rvNewGoods.addItemDecoration(new SpaceItemDecoration(20));
         mAdapter = new GoodsAdapter(getContext(), mList);
         rvNewGoods.setAdapter(mAdapter);
 

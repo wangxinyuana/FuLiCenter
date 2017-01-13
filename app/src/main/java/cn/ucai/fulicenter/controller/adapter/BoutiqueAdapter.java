@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
@@ -24,11 +23,11 @@ import static cn.ucai.fulicenter.application.I.TYPE_ITEM;
  * Created by Administrator on 2017/1/11.
  */
 
-public class GoodsAdapter extends RecyclerView.Adapter {
+public class BoutiqueAdapter extends RecyclerView.Adapter {
     Context mContext;
     ArrayList<NewGoodsBean> mList;
 
-    public GoodsAdapter(Context mContext, ArrayList<NewGoodsBean> list) {
+    public BoutiqueAdapter(Context mContext, ArrayList<NewGoodsBean> list) {
         this.mContext = mContext;
         this.mList = list;
         mList.addAll(list);
