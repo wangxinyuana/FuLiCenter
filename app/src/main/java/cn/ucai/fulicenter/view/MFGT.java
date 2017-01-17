@@ -2,10 +2,12 @@ package cn.ucai.fulicenter.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.nsd.NsdManager;
 
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.controller.activity.LoginActivity;
 import cn.ucai.fulicenter.controller.activity.MainActivity;
+import cn.ucai.fulicenter.controller.activity.RegisterActivity;
 
 /**
  * Created by Administrator on 2017/1/10 0010.
@@ -30,10 +32,11 @@ public class MFGT {
     }
 
 
-    public static void getoLogin(MainActivity mainActivity) {
-
+    public static void gotoLogin(Activity context) {
+        startActivity(context,LoginActivity.class);
     }
 
     public static void gotoRegister(LoginActivity loginActivity) {
+        startActivity(loginActivity, RegisterActivity.class);
     }
 }

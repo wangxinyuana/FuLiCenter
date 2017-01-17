@@ -4,6 +4,7 @@ import android.content.Context;
 
 import cn.ucai.fulicenter.model.bean.CategoryChildBean;
 import cn.ucai.fulicenter.model.bean.CategoryGroupBean;
+import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 
 

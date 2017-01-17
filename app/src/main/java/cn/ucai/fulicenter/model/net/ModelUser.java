@@ -21,6 +21,7 @@ public class ModelUser implements IModelUser {
                 .execute(listener);
 
     }
+    //注册用post，登陆用gst
 
     @Override
     public void register(Context context, String uesrName, String userNick, String password, OkHttpUtils.OnCompleteListener<String> listener) {

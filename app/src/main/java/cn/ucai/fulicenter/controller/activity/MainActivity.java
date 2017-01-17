@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.layout_personal_center:
                 if (FuLiCenterApplication.getUser()==null){
-                    MFGT.getoLogin(this);
+                    MFGT.gotoLogin(this);
                 }else {
                     index = 4;
                 }

@@ -18,9 +18,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-
+        <activity android:name=".controller.activity.LoginActivity"/>
+        <activity android:name=".controller.activity.RegisterActivity"/>
     </application>
 
 </manifest>
