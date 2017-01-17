@@ -2,10 +2,11 @@ package cn.ucai.fulicenter.controller.activity;
 
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
-import android.widget.CompoundButton;
+
 import android.widget.RadioButton;
 
 
@@ -13,16 +14,18 @@ import android.widget.RadioButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
-
+import cn.ucai.fulicenter.application.FuLiCenterApplication;
+import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
+import cn.ucai.fulicenter.view.MFGT;
 
 
-
-public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity {
 
     int index, currentIndex = 0;//之前被选中的和当前选中的
     // RadioButton rbNewGoods, rbBoutique, rbCategory, rbCart, rbPersonal;
-    RadioButton[] rbs = new RadioButton[5];
+    RadioButton[]   rbs = new RadioButton[5];
+
     @BindView(R.id.layout_newGoods)
     RadioButton layoutNewGoods;
     @BindView(R.id.layout_boutique)
@@ -33,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     RadioButton layoutCart;
     @BindView(R.id.layout_personal_center)
     RadioButton layoutPersonalCenter;
+
+    Fragment[] mFragment=new Fragment[5];
+    NewGoodsFragment mNewGoodsFragment;
+    BoutiqueFragment mBoutiqueFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +56,23 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         rbs[2] = layoutCategory;
         rbs[3] = layoutCart;
         rbs[4] = layoutPersonalCenter;
+
+        mNewGoodsFragment=new NewGoodsFragment();
+       mBoutiqueFragment=new BoutiqueFragment();
+       // mCategoryFragment=new CategoryFragment();
+
+        mFragment[0]=mNewGoodsFragment;
+        mFragment[1]=mBoutiqueFragment;
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.layout_container, new NewGoodsFragment()).commit();
+                .add(R.id.layout_container,mNewGoodsFragment)
+               .add(R.id.layout_container,mBoutiqueFragment)
+                //.add(R.id.layout_container,mCategoryFragment)
+                .show(mNewGoodsFragment)
+
+                 .hide(mBoutiqueFragment)
+              //  .hide(mCategoryFragment)
+                .commit();
+
 
     }
 
@@ -69,13 +91,24 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                 index = 3;
                 break;
             case R.id.layout_personal_center:
-                index = 4;
+                if (FuLiCenterApplication.getUser()==null){
+                    MFGT.getoLogin(this);
+                }else {
+                    index = 4;
+                }
                 break;
         }
+        setFragment();
         if (index != currentIndex) {
             setRadioStatus();
         }
 
+    }
+
+    private void setFragment() {
+        getSupportFragmentManager().beginTransaction().show(mFragment[index])
+                .hide(mFragment[currentIndex])
+                .commit();
     }
 
     private void setRadioStatus() {
@@ -90,8 +123,4 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         currentIndex = index;
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-    }
 }

@@ -4,18 +4,36 @@ import android.app.Activity;
 import android.content.Intent;
 
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.controller.activity.LoginActivity;
+import cn.ucai.fulicenter.controller.activity.MainActivity;
 
 /**
  * Created by Administrator on 2017/1/10 0010.
  */
 public class MFGT {
+    public static void finish(Activity activity) {
+        activity.finish();
+        activity.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
 
+    }
     public static void startActivity(Activity context, Class<?> clz) {
-       // context.overridePendingTransition(R.anim.push_right_in, R.anim.push_bottom_out);
-        context.startActivity(new Intent(context, clz));
+        context.startActivity(new Intent(context,clz));
+        context.overridePendingTransition(R.anim.push_right_in, R.anim.push_bottom_out);
+
     }
 
-    public static void finish(Activity activity) {
 
+    public static void startActivity(Activity context,Intent intent){
+        context.startActivity(intent);
+        context.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+
+    }
+
+
+    public static void getoLogin(MainActivity mainActivity) {
+
+    }
+
+    public static void gotoRegister(LoginActivity loginActivity) {
     }
 }
