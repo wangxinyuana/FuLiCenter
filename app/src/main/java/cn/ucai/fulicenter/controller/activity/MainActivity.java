@@ -17,6 +17,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
+import cn.ucai.fulicenter.controller.fragment.PersonalFragment;
 import cn.ucai.fulicenter.view.MFGT;
 
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment[] mFragment=new Fragment[5];
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+    PersonalFragment mPersonalFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
         mNewGoodsFragment=new NewGoodsFragment();
        mBoutiqueFragment=new BoutiqueFragment();
+        mPersonalFragment=new PersonalFragment();
        // mCategoryFragment=new CategoryFragment();
 
         mFragment[0]=mNewGoodsFragment;
         mFragment[1]=mBoutiqueFragment;
+        mFragment[4]=mPersonalFragment;
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.layout_container,mNewGoodsFragment)
                .add(R.id.layout_container,mBoutiqueFragment)

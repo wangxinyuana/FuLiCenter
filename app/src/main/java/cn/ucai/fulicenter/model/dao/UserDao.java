@@ -32,4 +32,8 @@ public class UserDao {
     }
 
 
+    public User getUser(String username) {
+        return  DBManager.getInstance().getUser(username);
+
+    }
 }
