@@ -3,6 +3,7 @@ package cn.ucai.fulicenter.controller.activity;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
@@ -10,9 +11,9 @@ import android.view.View;
 import android.widget.RadioButton;
 
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     int index, currentIndex = 0;//之前被选中的和当前选中的
     // RadioButton rbNewGoods, rbBoutique, rbCategory, rbCart, rbPersonal;
-    RadioButton[]   rbs = new RadioButton[5];
+    RadioButton[] rbs = new RadioButton[5];
 
     @BindView(R.id.layout_newGoods)
     RadioButton layoutNewGoods;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.layout_personal_center)
     RadioButton layoutPersonalCenter;
 
-    Fragment[] mFragment=new Fragment[5];
+    Fragment[] mFragment = new Fragment[5];
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
     PersonalFragment mPersonalFragment;
@@ -59,22 +60,22 @@ public class MainActivity extends AppCompatActivity {
         rbs[3] = layoutCart;
         rbs[4] = layoutPersonalCenter;
 
-        mNewGoodsFragment=new NewGoodsFragment();
-       mBoutiqueFragment=new BoutiqueFragment();
-        mPersonalFragment=new PersonalFragment();
-       // mCategoryFragment=new CategoryFragment();
+        mNewGoodsFragment = new NewGoodsFragment();
+        mBoutiqueFragment = new BoutiqueFragment();
+        mPersonalFragment = new PersonalFragment();
+        // mCategoryFragment=new CategoryFragment();
 
-        mFragment[0]=mNewGoodsFragment;
-        mFragment[1]=mBoutiqueFragment;
-        mFragment[4]=mPersonalFragment;
+        mFragment[0] = mNewGoodsFragment;
+        mFragment[1] = mBoutiqueFragment;
+        mFragment[4] = mPersonalFragment;
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.layout_container,mNewGoodsFragment)
-               .add(R.id.layout_container,mBoutiqueFragment)
+                .add(R.id.layout_container, mNewGoodsFragment)
+                .add(R.id.layout_container, mBoutiqueFragment)
                 //.add(R.id.layout_container,mCategoryFragment)
                 .show(mNewGoodsFragment)
 
-                 .hide(mBoutiqueFragment)
-              //  .hide(mCategoryFragment)
+                .hide(mBoutiqueFragment)
+                //  .hide(mCategoryFragment)
                 .commit();
 
 
@@ -95,22 +96,32 @@ public class MainActivity extends AppCompatActivity {
                 index = 3;
                 break;
             case R.id.layout_personal_center:
-                if (FuLiCenterApplication.getUser()==null){
+                if (FuLiCenterApplication.getUser() == null) {
                     MFGT.gotoLogin(this);
-                }else {
+                } else {
                     index = 4;
                 }
                 break;
         }
-        setFragment();
         if (index != currentIndex) {
+            setFragment();
             setRadioStatus();
         }
 
     }
 
     private void setFragment() {
-        getSupportFragmentManager().beginTransaction().show(mFragment[index])
+     /*   getSupportFragmentManager().beginTransaction()
+        .add(R.id.layout_container,mFragment[index])
+                .show(mFragment[index])
+                .hide(mFragment[currentIndex])
+                .commit();*/
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = mFragment[index];
+        if (!fragment.isAdded()) {
+            ft.add(R.id.layout_container, mFragment[index]);
+        }
+        ft.show(mFragment[index])
                 .hide(mFragment[currentIndex])
                 .commit();
     }

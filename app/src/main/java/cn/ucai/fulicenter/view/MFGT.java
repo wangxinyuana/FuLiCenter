@@ -3,6 +3,7 @@ package cn.ucai.fulicenter.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.nsd.NsdManager;
+import android.support.v4.app.FragmentActivity;
 
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.controller.activity.LoginActivity;
@@ -39,4 +40,7 @@ public class MFGT {
     public static void gotoRegister(LoginActivity loginActivity) {
         startActivity(loginActivity, RegisterActivity.class);
     }
+
+   /* public static void gotoSettings(FragmentActivity activity) {
+    }*/
 }
