@@ -16,6 +16,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.Result;
 import cn.ucai.fulicenter.model.bean.User;
+import cn.ucai.fulicenter.model.dao.UserDao;
 import cn.ucai.fulicenter.model.net.IModelUser;
 import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
@@ -80,14 +81,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String s) {
                 if(s!=null){
-                    Result result = ResultUtils.getResultFromJson(s, Result.class);
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
                     L.e(TAG,"result"+result);
                     if (result!=null) {
                         if (result.isRetMsg()) {
-                            User user=(User) result.getRetData();
-                            SharePrefrenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
+                            if(result.getRetData() instanceof User){
+
+                                User user=(User) result.getRetData();
+                                boolean saveUser= UserDao.getInstance().saveUser(user);
+                                L.e(TAG,"saveUser="+saveUser);
+
+                               // boolean saveUser=UserDao.getInstance().saveUser(user);
+                                SharePrefrenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
+                            }
+
                             MFGT.finish(LoginActivity.this);
-                        } else {
+                        } else { // boolean saveUser=UserDao.getInstance().saveUser(user);
                             if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
                                 CommonUtils.showLongToast(getString(R.string.login_fail_unknow_user));
                             }
