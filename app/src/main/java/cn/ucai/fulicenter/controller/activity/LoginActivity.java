@@ -45,10 +45,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.backClickArea, R.id.btn_login, R.id.btn_register})
+    @OnClick({R.id.ivReturn, R.id.btn_login, R.id.btn_register})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.backClickArea:
+            case R.id.ivReturn:
                 MFGT.finish(this);
                 break;
             case R.id.btn_login:

@@ -9,6 +9,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.controller.activity.LoginActivity;
 import cn.ucai.fulicenter.controller.activity.MainActivity;
 import cn.ucai.fulicenter.controller.activity.RegisterActivity;
+import cn.ucai.fulicenter.controller.activity.SetitingsActivity;
 
 /**
  * Created by Administrator on 2017/1/10 0010.
@@ -41,6 +42,9 @@ public class MFGT {
         startActivity(loginActivity, RegisterActivity.class);
     }
 
-   /* public static void gotoSettings(FragmentActivity activity) {
-    }*/
+    public static void gotoSettings(Activity activity) {
+        startActivity(activity, SetitingsActivity.class);
+    }
+
+
 }

@@ -29,6 +29,8 @@ public class PersonalFragment extends Fragment {
     ImageView mIvUserAvatar;
     @BindView(R.id.tv_user_name)
     TextView mTvUserName;
+    @BindView(R.id.tv_center_settings)
+    TextView mTvCenterSettings;
 
 
     @Override
@@ -40,22 +42,24 @@ public class PersonalFragment extends Fragment {
     }
 
     private void initData() {
-        User user= FuLiCenterApplication.getUser();
-        L.e(TAG,"user"+user);
-        if (user!=null){
+        User user = FuLiCenterApplication.getUser();
+        L.e(TAG, "user" + user);
+        if (user != null) {
             loadUserInfo(user);
-        }else {
+        } else {
             MFGT.gotoLogin(getActivity());
         }
     }
 
 
     private void loadUserInfo(User user) {
-        ImageLoader.downloadImg(getContext(),mIvUserAvatar,user.getAvatarPath());
+        ImageLoader.downloadImg(getContext(), mIvUserAvatar, user.getAvatarPath());
         mTvUserName.setText(user.getMuserNick());
     }
- /*   @OnClick({R.id.tv_center_settings,R.id.center_user_info})
+
+
+    @OnClick({R.id.tv_center_settings,R.id.center_user_info})
     public void  onClick(){
        MFGT.gotoSettings(getActivity());
-    }*/
+    }
 }

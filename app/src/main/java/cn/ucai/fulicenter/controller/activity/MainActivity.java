@@ -138,4 +138,18 @@ public class MainActivity extends AppCompatActivity {
         currentIndex = index;
     }
 
+    @Override
+    protected void onResume() {
+        //L.Te(TAG,"onResume,currentIndex="+currentIndex+",index="+index);
+        if(index==4 && FuLiCenterApplication.getUser()==null){
+            index=0;
+            setFragment();
+            setRadioStatus();
+
+        }
+        super.onResume();
+    }
+
+
+
 }
