@@ -16,6 +16,7 @@ import cn.ucai.fulicenter.application.I;
 
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.SharePrefrenceUtils;
+import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 
 import cn.ucai.fulicenter.model.utils.L;
@@ -73,6 +74,10 @@ public class SetitingsActivity extends AppCompatActivity {
     @OnClick(R.id.layout_user_profile_nickname)
     public void updateNick() {
         MFGT.gotoUpDataNick(this);
+    }
+    @OnClick
+    protected void onClickUserName(){
+        CommonUtils.showLongToast(R.string.username_connot_be_modify);
     }
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
