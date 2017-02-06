@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +52,11 @@ public class PersonalFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
 
     private void loadUserInfo(User user) {
         ImageLoader.downloadImg(getContext(), mIvUserAvatar, user.getAvatarPath());
@@ -59,7 +65,8 @@ public class PersonalFragment extends Fragment {
 
 
     @OnClick({R.id.tv_center_settings,R.id.center_user_info})
-    public void  onClick(){
+    public void  onClick(View v){
+        Toast.makeText(getActivity(),"跳转到设置",Toast.LENGTH_SHORT).show();
        MFGT.gotoSettings(getActivity());
     }
 }

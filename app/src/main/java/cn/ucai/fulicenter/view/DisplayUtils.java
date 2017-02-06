@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.view;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.TextView;
 
 import cn.ucai.fulicenter.R;
@@ -13,10 +14,15 @@ public class DisplayUtils {
     public static void initBack(Activity activity){
         activity.finish();
     }
-    public static void initBackWithTitle(Activity activity,String title){
-       // TextView textView=(TextView) activity.findViewById(R.id.layout_title);
-        //textView.setText(title);
-        initBack(activity);
+    public static void initBackWithTitle(final Activity activity,String title){
+        TextView textView=(TextView) activity.findViewById(R.id.backClickArea);
+        textView.setText(title);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initBack(activity);
+            }
+        });
     }
 
 

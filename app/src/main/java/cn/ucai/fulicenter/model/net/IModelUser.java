@@ -15,4 +15,5 @@ import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 public interface IModelUser {
     void login(Context context, String uesrName, String password, OkHttpUtils.OnCompleteListener<String> listener);
     void register(Context context, String uesrName, String userNick,String password,OkHttpUtils.OnCompleteListener<String> listener);
+    void updateNick(Context context,String userName,String userNick, OkHttpUtils.OnCompleteListener<String> listener);
 }
