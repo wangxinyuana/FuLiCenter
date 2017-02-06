@@ -28,8 +28,6 @@ import cn.ucai.fulicenter.view.MFGT;
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG=RegisterActivity.class.getSimpleName();
 
-    @BindView(R.id.backClickArea)
-    ImageView mBackClickArea;
     @BindView(R.id.username)
     EditText mUsername;
     @BindView(R.id.nick)
@@ -47,10 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.backClickArea, R.id.btn_register})
+    @OnClick({R.id.ivReturn, R.id.btn_register})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.backClickArea:
+            case R.id.ivReturn:
                 MFGT.finish(this);
                 break;
             case R.id.btn_register:

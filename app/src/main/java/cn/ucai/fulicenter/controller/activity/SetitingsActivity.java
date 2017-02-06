@@ -16,6 +16,7 @@ import cn.ucai.fulicenter.model.net.SharePrefrenceUtils;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 
 import cn.ucai.fulicenter.model.utils.OnSetAvatarListener;
+import cn.ucai.fulicenter.view.DisplayUtils;
 import cn.ucai.fulicenter.view.MFGT;
 
 /**
@@ -35,6 +36,7 @@ public class SetitingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
+        DisplayUtils.initBackWithTitle(this,"设置");
         initData();
     }
 
